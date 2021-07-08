@@ -3,11 +3,16 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 // test 생성 단축키 : Ctrl + Shift + T
+//@Service // Spring 이 해당 어노테이션이 있는 코드를 service에 해당하는 코드라는 것을 인식할 수 있도록 해준다.
+// -> 이러한 방식을 "component 스캔과 자동 의존관계 설정"이라 한다.
+// 스프링은 스프링 컨테이너에 스프링 빈을 등록할 때 기본으로 싱글톤(유일)으로 등록하고 공유한다.
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -21,6 +26,7 @@ public class MemberService {
         그 결과 테스트 코드에서는 각 테스트 실행 전 먼저 MemberRepository를 새로 생성해서 먼저 전달해주도록
         변경하였다.
      */
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
