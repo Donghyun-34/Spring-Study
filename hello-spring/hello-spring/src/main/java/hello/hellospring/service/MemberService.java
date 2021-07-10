@@ -17,7 +17,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    // Ganaration 단축키 : Alt + Insert
+    // Generation 단축키 : Alt + Insert
 
     /*
         test 코드에서 테스트를 독립적으로 실행하기 위해서 Dependency Injection(DI)을 수행한 결과이다.
