@@ -6,6 +6,7 @@ import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,9 @@ import java.util.Optional;
 //@Service // Spring 이 해당 어노테이션이 있는 코드를 service에 해당하는 코드라는 것을 인식할 수 있도록 해준다.
 // -> 이러한 방식을 "component 스캔과 자동 의존관계 설정"이라 한다.
 // 스프링은 스프링 컨테이너에 스프링 빈을 등록할 때 기본으로 싱글톤(유일)으로 등록하고 공유한다.
+// JPA 는 반드시 서비스 계층에 트랜잭션이 존재해야 한다. -> 즉, 모든 변경은 트랜잭션 안에서만 발생해야 한다.
+
+@Transactional
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -36,8 +40,18 @@ public class MemberService {
      */
     public Long join(Member member) {
         //같은 이름이 있는 중복 회원 허용 X
+        /* 수동 시간 측정 방식
+        long start = System.currentTimeMillis();
+
+        try{
+
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
+         */
         validateDuplicateMember(member);
-        
         memberRepository.save(member);
         return member.getId();
     }
@@ -67,3 +81,8 @@ public class MemberService {
         return memberRepository.findById(memberId);
     }
 }
+
+/*
+ * 회원가입, 회원 조회 와 같은 기능들은 "핵심 관심 사항(core concern)"이다.
+ * 그리고 시간 측정은 "공통 관심 사항(cross-cutting concern)"이다.
+ */
