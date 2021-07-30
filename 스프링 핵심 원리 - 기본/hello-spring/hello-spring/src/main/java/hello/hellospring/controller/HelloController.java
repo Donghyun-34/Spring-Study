@@ -22,15 +22,6 @@ public class HelloController {
         return "hello-template";
     }
 
-    // API 사용 버전 - 따로 View 가 필요없다.
-    // ResponseBody 문자 반환
-    @GetMapping("hello-string")
-    @ResponseBody
-    public String helloString(@RequestParam("name") String name){
-        return "hello " + name;
-        //문자가 입력되면 StringConverter 가 동작
-    }
-
     // ResponseBody 객체 반환
     @GetMapping("hello-api")
     @ResponseBody
