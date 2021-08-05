@@ -15,9 +15,10 @@ class MemoryMemberRepositoryTest {
 
     MemoryMemberRepository repository = new MemoryMemberRepository();
 
-    /* test case들은 서로간의 의존관계나 연관 관계가 없어야 하기 때문에 하나의 test가 종료되면 아래의 anotation으로
-    선언되어 있는 내용이 수행된다.
-    지금은 repository를 초기화시키는 내용이 저장되어 있다.
+    /*
+        test case들은 서로간의 의존관계나 연관 관계가 없어야 하기 때문에 하나의 test가 종료되면 아래의 anotation으로
+        선언되어 있는 내용이 수행된다.
+        지금은 repository를 초기화시키는 내용이 저장되어 있다.
      */
     @AfterEach
     public void afterEach() {

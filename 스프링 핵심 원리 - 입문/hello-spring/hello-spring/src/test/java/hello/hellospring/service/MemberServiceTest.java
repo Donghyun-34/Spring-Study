@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemberServiceTest {
 
-    MemberService memberService;
     // 아래의 경우 실제 memberService의 인스턴스와 memberRepository는 사실상 서로 다른 인스턴스이다. -> 새로 선언했기 때문에
     // 물론 지금의 경우에는 memoryMembetRepository가 static으로 선언되어 있어서 실행에 문제는 없지만 이 경우가 아니면 충돌이 발생한다.
+    MemberService memberService;
     MemoryMemberRepository memberRepository = new MemoryMemberRepository();
 
     @BeforeEach
